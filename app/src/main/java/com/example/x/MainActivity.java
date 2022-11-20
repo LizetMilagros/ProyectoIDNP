@@ -1,6 +1,8 @@
 package com.example.x;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -12,18 +14,23 @@ import android.widget.Toast;
 
 import DataBase.DBusuario;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CallbackFragment {
 
-    EditText username, password, confirmPassword;
-    Button login, register;
-    DBusuario DB;
+    Fragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
+    //EditText username, password, confirmPassword;
+    //Button login, register;
+    //DBusuario DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //DB = new DBusuario(this);
 
-        username = findViewById(R.id.txtNameUser);
+        /*username = findViewById(R.id.txtNameUser);
         password =  findViewById(R.id.txtPassword);
         confirmPassword =  findViewById(R.id.txtConfirmPassword);
         login =  findViewById(R.id.btnLogin);
@@ -67,9 +74,34 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace();
                 fragmentTransaction.commit();
-                /*Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });*/
+
+        addFragment();
+    }
+
+    public void addFragment(){
+        Login fragment = new Login();
+        fragment.setCallbackFragment(this);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragmentContainer, fragment);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceFragment(){
+        fragment = new Register();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void changeFragment() {
+        replaceFragment();
     }
 }
