@@ -55,7 +55,7 @@
             android:textColor="#ffffff"
             android:textSize="30dp"
             android:textStyle="bold"/>
-        <Button
+        <!--<Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -65,6 +65,6 @@
             android:text="INICIAR SESION"
             android:textColor="#ffffff"
             android:textSize="30dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"/>-->
     </LinearLayout>
 </FrameLayout>

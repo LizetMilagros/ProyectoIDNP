@@ -1,6 +1,7 @@
 package com.example.x;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -104,8 +105,8 @@ public class Login extends Fragment {
                     Boolean checkuserpass = DB.checkusernamepassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(getContext(), "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        //Intent intent  = new Intent(getApplicationContext(), MenuActivity.class);
-                        //startActivity(intent);
+                        Intent intent  = new Intent(getContext(), MenuActivity.class);
+                        startActivity(intent);
                     }else{
                         Toast.makeText(getContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }

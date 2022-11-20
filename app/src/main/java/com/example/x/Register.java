@@ -1,6 +1,7 @@
 package com.example.x;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -73,8 +74,8 @@ public class Register extends Fragment {
                             Boolean insert = DB.insertData(user, pass);
                             if (insert == true) {
                                 Toast.makeText(getContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
-                                //Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                                //startActivity(intent);
+                                Intent intent = new Intent(getContext(), MainActivity.class);
+                                startActivity(intent);
                                 //deberia llevar a login
                                 //callbackFragment.changeFragment();
                             } else {
