@@ -36,7 +36,7 @@ public class Login extends Fragment {
     }
 
     public Login() {
-        // Required empty public constructor
+        // constructor
     }
 
     @Override
