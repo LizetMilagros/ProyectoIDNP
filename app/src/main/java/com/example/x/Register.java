@@ -20,7 +20,7 @@ import DataBase.DBusuario;
 
 public class Register extends Fragment {
 
-    EditText username, password, confirmPassword;
+    EditText username,correo, password, confirmPassword;
     Button login, register;
     DBusuario DB;
     CallbackFragment callbackFragment;
@@ -53,6 +53,7 @@ public class Register extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         username = view.findViewById(R.id.txtNameUser);
+        correo = view.findViewById(R.id.txtEmail);
         password =  view.findViewById(R.id.txtPassword);
         confirmPassword =  view.findViewById(R.id.txtConfirmPassword);
         register =  view.findViewById(R.id.btnRegister);
@@ -62,30 +63,29 @@ public class Register extends Fragment {
             @Override
             public void onClick(View view) {
                 String user = username.getText().toString();
+                String email = correo.getText().toString();
                 String pass = password.getText().toString();
                 String repass = confirmPassword.getText().toString();
 
-                if (user.equals("") || pass.equals("") || repass.equals(""))
-                    Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                if (user.equals("")  || email.equals("")|| pass.equals("") || repass.equals(""))
+                    Toast.makeText(getContext(), "ingresar todo los campos", Toast.LENGTH_SHORT).show();
                 else {
                     if (pass.equals(repass)) {
-                        Boolean checkuser = DB.checkusername(user);
+                        Boolean checkuser = DB.checkusername(email);
                         if (checkuser == false) {
-                            Boolean insert = DB.insertData(user, pass);
+                            Boolean insert = DB.insertData(email, pass);
                             if (insert == true) {
-                                Toast.makeText(getContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 startActivity(intent);
-                                //deberia llevar a login
-                                //callbackFragment.changeFragment();
                             } else {
-                                Toast.makeText(getContext(), "Registration failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Registro fallido", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "User already exists! please sign in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "usuario ya existe! ingrese nuevo", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Passwords not matching", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "contraseña no coincide", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
